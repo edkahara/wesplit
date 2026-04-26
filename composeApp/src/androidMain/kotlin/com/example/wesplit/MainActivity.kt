@@ -11,6 +11,10 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.safeContentPadding
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -18,27 +22,78 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
-import org.jetbrains.compose.resources.painterResource
-import wesplit.composeapp.generated.resources.Res
-import wesplit.composeapp.generated.resources.ios_globe
+import androidx.compose.ui.unit.dp
+
+private val lazyModifier = Modifier
+    .background(Color.White)
+    .safeContentPadding()
+    .fillMaxSize()
 
 @Composable
 fun AndroidApp() {
     MaterialTheme {
-        Column(
-            modifier = Modifier
-                .background(Color.White)
-                .safeContentPadding()
-                .fillMaxSize(),
-            verticalArrangement = Arrangement.Center,
+        LazyColumn (
+            modifier = lazyModifier,
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            Image(
-                painter = painterResource(Res.drawable.ios_globe),
-                contentDescription = "Andy Rubin",
-                modifier = Modifier.fillMaxWidth()
-            )
-            Text("Hello, world!")
+            item {
+                Column(
+                    modifier=Modifier.padding(bottom=10.dp)
+                ) {
+                    Text("Hello, world!")
+                }
+            }
+            item {
+                Column(
+                    modifier=Modifier.padding(bottom=10.dp)
+                ) {
+                    Text("Hello, world!")
+                    Text("Hello, world!")
+                    Text("Hello, world!")
+                    Text("Hello, world!")
+                    Text("Hello, world!")
+                    Text("Hello, world!")
+                    Text("Hello, world!")
+                    Text("Hello, world!")
+                    Text("Hello, world!")
+                    Text("Hello, world!")
+                    Text("Hello, world!")
+                    Text("Hello, world!")
+                    Text("Hello, world!")
+                    Text("Hello, world!")
+                    Text("Hello, world!")
+                    Text("Hello, world!")
+                    Text("Hello, world!")
+                    Text("Hello, world!")
+                }
+            }
+            item {
+                Column(
+                    modifier=Modifier.padding(bottom=10.dp)
+                ) {
+                    Text("Hello, world!")
+                    Text("Hello, world!")
+                    Text("Hello, world!")
+                    Text("Hello, world!")
+                    Text("Hello, world!")
+                    Text("Hello, world!")
+                    Text("Hello, world!")
+                    Text("Hello, world!")
+                    Text("Hello, world!")
+                    Text("Hello, world!")
+                    Text("Hello, world!")
+                    Text("Hello, world!")
+                    Text("Hello, world!")
+                    Text("Hello, world!")
+                    Text("Hello, world!")
+                    Text("Hello, world!")
+                    Text("Hello, world!")
+                    Text("Hello, world!")
+                    Text("Hello, world!")
+                    Text("Hello, world!")
+                }
+
+            }
         }
     }
 }
