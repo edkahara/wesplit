@@ -28,9 +28,9 @@ fun AndroidApp() {
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
-            for (i in 0 until 100) {
+            (0 until 100).forEach {
                 item {
-                    Text(text = "Row ${i}!", color = Color.Magenta)
+                    Text(text = "Row ${it}!", color = Color.Magenta)
                 }
             }
         }
