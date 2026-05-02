@@ -9,22 +9,23 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.safeContentPadding
-import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.text.input.TextFieldValue
 
 @Composable
 fun AndroidApp() {
-    var tapCount by remember { mutableIntStateOf(0) }
+    var name by remember {mutableStateOf(TextFieldValue("world"))}
 
     MaterialTheme {
         Column(
@@ -35,11 +36,13 @@ fun AndroidApp() {
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
-            Button(onClick = {
-                tapCount += 1
-            }) {
-                Text(text = "Tapcount: ${tapCount}", color = Color.Magenta)
-            }
+            TextField(
+                value = name,
+                onValueChange = { newName ->
+                    name = newName
+                }
+            )
+            Text(text = "Hello ${name.text}!", color = Color.Magenta)
         }
 
     }
