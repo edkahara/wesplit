@@ -13,12 +13,17 @@ struct ContentView: View {
                 Section {
                     TextField("Amount", value: $checkAmount, format: .currency(code: Locale.current.currency?.identifier ?? "USD"))
                         .keyboardType(.decimalPad)
+                    Picker("Number of people", selection: $numberOfPeople) {
+                        ForEach(2..<100){
+                            Text("\($0) people")
+                        }
+                    }
                 }
                 Section {
                     Text(checkAmount, format: .currency(code: Locale.current.currency?.identifier ?? "USD"))
                 }
             }
-            .navigationTitle("Select your student")
+            .navigationTitle("WeSplit")
         }
     }
 }

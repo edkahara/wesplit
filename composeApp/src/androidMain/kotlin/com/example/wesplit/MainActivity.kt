@@ -7,12 +7,18 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeContentPadding
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.ExposedDropdownMenuAnchorType
+import androidx.compose.material3.ExposedDropdownMenuBox
+import androidx.compose.material3.ExposedDropdownMenuDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -42,7 +48,9 @@ fun AndroidApp() {
     var checkAmount by remember { mutableDoubleStateOf(0.0) }
     var checkAmountString by remember { mutableStateOf("%.2f".format(checkAmount) )}
     var numberOfPeople by remember { mutableIntStateOf(2) }
+    var numberOfPeopleString by remember { mutableStateOf(numberOfPeople.toString()) }
     var tipPercentage by remember { mutableIntStateOf(20) }
+    var expanded by remember { mutableStateOf(false) }
 
     val tipPercentages = listOf(10, 15, 20, 25, 0)
 
@@ -85,6 +93,55 @@ fun AndroidApp() {
                     readOnly = true,
                     prefix = { Text(currency.getSymbol(locale)) },
                 )
+            }
+            Column(modifier = Modifier.padding(16.dp)) {
+                Text(
+                    text = "Number of people",
+                    style = MaterialTheme.typography.labelLarge,
+                    color = MaterialTheme.colorScheme.onSurface
+                )
+
+                Spacer(modifier = Modifier.height(16.dp))
+
+                ExposedDropdownMenuBox(
+                    expanded = expanded,
+                    onExpandedChange = { expanded = !expanded }
+                ) {
+                    TextField(
+                        value = numberOfPeopleString,
+                        onValueChange = {},
+                        readOnly = true,
+                        trailingIcon = {
+                            ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded)
+                        },
+                        colors = ExposedDropdownMenuDefaults.textFieldColors(),
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .menuAnchor(ExposedDropdownMenuAnchorType.PrimaryNotEditable)
+                    )
+
+                    ExposedDropdownMenu(
+                        expanded = expanded,
+                        onDismissRequest = { expanded = false }
+                    ) {
+                        (2 until 100).forEach { option ->
+                            DropdownMenuItem(
+                                text = {
+                                    Text(
+                                        option.toString(),
+                                        color = MaterialTheme.colorScheme.onSurface
+                                    )
+                                },
+                                onClick = {
+                                    numberOfPeopleString = option.toString()
+                                    numberOfPeople = option
+                                    expanded = false
+                                },
+                                contentPadding = ExposedDropdownMenuDefaults.ItemContentPadding
+                            )
+                        }
+                    }
+                }
             }
         }
 2
