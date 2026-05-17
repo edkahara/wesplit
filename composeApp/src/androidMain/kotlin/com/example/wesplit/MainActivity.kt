@@ -57,6 +57,13 @@ fun AndroidApp() {
 
     val tipPercentages = listOf(10, 15, 20, 25, 0)
 
+    fun getTotalPerPerson(): String {
+        val tipValue = checkAmount / 100 * tipPercentage
+        val grandTotal = checkAmount + tipValue
+        val amountPerPerson = grandTotal / numberOfPeople
+        return amountPerPerson.toString()
+    }
+
     MaterialTheme {
         Column (
             modifier = Modifier
@@ -154,10 +161,11 @@ fun AndroidApp() {
             Column(modifier = Modifier.padding(16.dp)) {
                 TextField(
                     modifier = Modifier.fillMaxWidth(),
-                    value = checkAmountString,
+                    value = getTotalPerPerson(),
                     onValueChange = {},
                     readOnly = true,
                     prefix = { Text(currency.getSymbol(locale)) },
+                    label = { Text("Total per person") },
                 )
             }
         }
