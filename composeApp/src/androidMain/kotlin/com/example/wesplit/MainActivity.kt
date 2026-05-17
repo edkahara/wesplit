@@ -20,6 +20,9 @@ import androidx.compose.material3.ExposedDropdownMenuAnchorType
 import androidx.compose.material3.ExposedDropdownMenuBox
 import androidx.compose.material3.ExposedDropdownMenuDefaults
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.SegmentedButton
+import androidx.compose.material3.SegmentedButtonDefaults
+import androidx.compose.material3.SingleChoiceSegmentedButtonRow
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
@@ -86,20 +89,7 @@ fun AndroidApp() {
                 )
             }
             Column(modifier = Modifier.padding(16.dp)) {
-                TextField(
-                    modifier = Modifier.fillMaxWidth(),
-                    value = checkAmountString,
-                    onValueChange = {},
-                    readOnly = true,
-                    prefix = { Text(currency.getSymbol(locale)) },
-                )
-            }
-            Column(modifier = Modifier.padding(16.dp)) {
-                Text(
-                    text = "Number of people",
-                    style = MaterialTheme.typography.labelLarge,
-                    color = MaterialTheme.colorScheme.onSurface
-                )
+                Text("Number of people")
 
                 Spacer(modifier = Modifier.height(16.dp))
 
@@ -114,6 +104,7 @@ fun AndroidApp() {
                         trailingIcon = {
                             ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded)
                         },
+                        label = { Text("Number of people") },
                         colors = ExposedDropdownMenuDefaults.textFieldColors(),
                         modifier = Modifier
                             .fillMaxWidth()
@@ -142,6 +133,32 @@ fun AndroidApp() {
                         }
                     }
                 }
+            }
+            Column(modifier = Modifier.padding(16.dp)) {
+                Text("How much do you want to tip?")
+                SingleChoiceSegmentedButtonRow() {
+                    tipPercentages.forEachIndexed { index, option ->
+                        SegmentedButton (
+                            shape = SegmentedButtonDefaults.itemShape(
+                                index = index,
+                                count = tipPercentages.size
+                            ),
+                            onClick = { tipPercentage = option },
+                            selected = tipPercentage == option,
+                            label = { Text("$option%") },
+                            icon = {}
+                        )
+                    }
+                }
+            }
+            Column(modifier = Modifier.padding(16.dp)) {
+                TextField(
+                    modifier = Modifier.fillMaxWidth(),
+                    value = checkAmountString,
+                    onValueChange = {},
+                    readOnly = true,
+                    prefix = { Text(currency.getSymbol(locale)) },
+                )
             }
         }
 2
