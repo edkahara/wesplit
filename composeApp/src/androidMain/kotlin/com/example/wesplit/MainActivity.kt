@@ -36,6 +36,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableDoubleStateOf
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import java.util.Currency
@@ -45,7 +46,6 @@ import java.util.Locale
 @Composable
 fun AndroidApp() {
     val locale = Locale.getDefault()
-    println("locale $locale")
     val currency =  Currency.getInstance(locale)
 
     var checkAmount by remember { mutableDoubleStateOf(0.0) }
@@ -92,7 +92,7 @@ fun AndroidApp() {
                     },
                     label = { Text("Amount") },
                     prefix = { Text(currency.getSymbol(locale)) },
-                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Decimal),
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Decimal, imeAction = ImeAction.Done),
                 )
             }
             Column(modifier = Modifier.padding(16.dp)) {
@@ -143,7 +143,7 @@ fun AndroidApp() {
             }
             Column(modifier = Modifier.padding(16.dp)) {
                 Text("How much do you want to tip?")
-                SingleChoiceSegmentedButtonRow() {
+                SingleChoiceSegmentedButtonRow {
                     tipPercentages.forEachIndexed { index, option ->
                         SegmentedButton (
                             shape = SegmentedButtonDefaults.itemShape(
@@ -169,7 +169,6 @@ fun AndroidApp() {
                 )
             }
         }
-2
     }
 }
 
